@@ -59,9 +59,9 @@ Then, you can directly run a non-Markovian simulation with this toy example:
 	G_simul.plot_inter_event_time_distribution()
 	G_simul.plot_populations()
 
-The algorithm runs a few seconds and output the following figures:
+The algorithm run for a few seconds and output the following figures:
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR_test.png" width=800>
+  <img src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR_test.png" width=900>
 </p>
 
 Note that you can disables all printing by passing the argument `verbose = False` when running the simulation. Keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a channel is defined without or with more than one reactant, it will be considered as a Poisson process. Other examples, including the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the `/Examples` folder. 
