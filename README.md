@@ -59,7 +59,7 @@ Then, you can directly run a non-Markovian simulation with this toy example (oth
 	G_simul.plot_inter_event_time_distribution()
 	G_simul.plot_populations()
 
-The algorithm run for a few seconds and output the following figures (note that you can disables all printing and plotting by passing the argument `verbose = False` when running the simulation):
+The algorithm runs for a few seconds and output the following figures (note that you can disables all printing and plotting by passing the argument `verbose = False` when running the simulation):
 <p align="center">
   <img src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR_test.png" width=800>
 </p>
