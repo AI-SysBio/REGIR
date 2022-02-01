@@ -6,31 +6,24 @@ Discrete stochastic processes are widespread in both nature and human-made syste
 &nbsp;
 
 
-The model is based on a system of 11 stochastic interactions, implemented with a modified Gillepsie algorithm that can account for the individual properties of each agents [2].
+The algorithm efficiency and accuracy lies in its rejection approach, whereby processes that include undesired reactions are computed and subsequently rejected. See the corresponding paper for details. With the current implementation, the following distribution are available.  
 
-      8 types of reactants are considered:
-      - Centroblast (Dark Zone) = CB
-      - Centrocytes (Light Zone) = CC
-      - Selected Centrocytes (Light Zone) = CCsel
-      - Bound Centrocytes (Light Zone) = [CCTC]
-      - Free T follicular helper (Light Zone) = Tfh
-        (Plus 3 additional cell types, leaving the GC)
-      - Memory cells (Outside GC) = MBC
-      - Plasma cells (Outside GC) = PC
-      - Dead cells = 0 
+      Exponential distribution:
       
-      11 reactions are considered:
-      - Cell entering the GC:        0 -> CB
-      - Centrocyte apoptosis:        CC -> 0
-      - Centroblast migration:       CB -> CC
-      - Centrocyte unbinding:        [CCTC] -> CC + TC
-      - Centrocyte recirculation:    CC -> CB
-      - Centrocyte exit:             CC -> MBC or PC
-      - Centrocyte Tfh binding:      CC + TC = [CCTC]
-      - Tfh switch:                  [CC1TC] + CC2 -> CC1 + [CC2TC]
-      - Centroblast division:        CB -> 2CB
-      - Centroblast apoptosis:       CB -> 0
-      - Centrocyte antigen uptake:   CC -> CC
+      Normal distrubution:
+      
+      LogNormal distribution:
+      
+      Gamma distribution:
+      
+      Weibull distribution:
+      
+      Cauchy distribution:
+      
+      
+
+      
+Note that monotolically decreasing distribution, such as Weibull ($\alpha < 1$), gamma ($\alpha < 1$) or power laws, are not available in the current implementation of this repository, as theses can be more elegantly and efficiently simulated with the Laplace Gillespie algorithm [2]. Feel free to drop me an email if you would be interrested in adding the Laplace Gillespie to this repository, or adding a new distribution of your interrest.
         
         
 ### Running the code
@@ -40,3 +33,5 @@ To launch the simulation, run `main.py`. Running the program requires python3 wi
 ## References
 
 [1] Pélissier, A, Phan, M, et al. Practical and scalable simulations of non-Markovian stochastic processes. Proceedings of the National Academy of Sciences (2022)
+
+[2] Masuda, Naoki, and Luis EC Rocha. "A Gillespie algorithm for non-Markovian stochastic processes." Siam Review 60.1 (2018): 95-115.
