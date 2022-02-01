@@ -22,10 +22,10 @@ A simple example of a non-Markovian Gillepsie simulation is provided below. Keep
 
 	#Set the simulation parameters:
 	class param:
-		Tend = 10				#length of the simulation
-		unit = 'h'				#unit of time (is used for plotting purpose only)
-		N_simulations = 20			#The simulation results should be averaged over many trials
-		timepoints = 100			#Number of timepoints to record (make surethat this number isnt too big)
+		Tend = 10		#Length of the simulation
+		unit = 'h'		#Unit of time (is used for plotting purpose only)
+		N_simulations = 20	#The simulation results should be averaged over many trials
+		timepoints = 100	#Number of timepoints to record (make surethat this number isnt too big)
 
 	r1 = 1
 	r2 = 2
