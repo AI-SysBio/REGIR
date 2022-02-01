@@ -71,14 +71,22 @@ def Cauchy_rate(t, rate,gam):
     return rate
 
 
+class counts:
+    channel_numbers = 0
+
 class Reaction_channel():
     
     def __init__(self,param_simulation, rate=1, shape_param=1, distribution = 'Weibull', name='', reactants = [], products = [], transfer_identity = False):
+        
+        counts.channel_numbers += 1
+        
         """ Fixed parameters """
         self.reactants = reactants #reactant list of str
         self.products = products #produect list of str
         self.rate = rate #reaction rate
         self.shape_param = shape_param #alpha shape parameter of Weibull distribution
+        if name == '':
+            self.name = "Number %s" % (counts.channel_numbers)
         self.name = name
         self.distribution = distribution #distribution type ('Weibull, Gamma, Gaussian)
         self.transfer_identity = transfer_identity
@@ -196,8 +204,6 @@ class Reactant():
         """
         Generate a 32char hex uuid to use as a key 
         for each cell in the sorted dictionary
-    
-        random = SystemRandom() # globally defined
     
         """
         return uuid.UUID(int=random.getrandbits(128),version=4).hex        
@@ -564,7 +570,7 @@ class Gillespie_simulation():
         for ri,reaction_chanel in enumerate(self.reaction_channel_list):
             wait_times = np.array(reaction_chanel.wait_times)
             
-            print("\n Reaction chanel %s:" % reaction_chanel.name)
+            print("\n Reaction channel %s:" % reaction_chanel.name)
 
             if len(wait_times) == 0:
                 print('   This reaction has never occured')
@@ -659,6 +665,7 @@ class Gillespie_simulation():
                     
                     
         print()
+        print('  Notes:')
         print('  - It is possible that the distribution do not match for reactions')
         print('    where the same reactant is involved in more than one reaction,')
         print('    or if at least one product of the reaction is a reactant.')
