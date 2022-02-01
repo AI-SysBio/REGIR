@@ -6,24 +6,32 @@ Discrete stochastic processes are widespread in both nature and human-made syste
 &nbsp;
 
 
-The algorithm efficiency and accuracy lies in its rejection approach, whereby processes that include undesired reactions are computed and subsequently rejected. See the corresponding paper for details. With the current implementation, the following distribution are available.  
+The algorithm efficiency and accuracy lies in its rejection approach, whereby processes that include undesired reactions are computed and subsequently rejected. See the corresponding paper for details. With the current implementation, each distributions are characterised by their rate and a shape parameter as follow:
 
-      Exponential distribution:
+      Exponential:
+          - rate: 1/mean
+          - shape parameter: None
       
-      Normal distrubution:
+      Normal:
+          - rate: 1/mean
+          - shape: std/mean
       
-      LogNormal distribution:
-      
-      Gamma distribution:
-      
-      Weibull distribution:
-      
-      Cauchy distribution:
-      
+      LogNormal:
+          - rate: 1/mean
+          - shape: std/mean
+      Gamma:
+          - rate: 1/mean
+          - shape: α >= 1 (https://en.wikipedia.org/wiki/Gamma_distribution)
+      Weibull:
+          - rate: 1/mean
+          - shape: k >= 1 (https://en.wikipedia.org/wiki/Weibull_distribution)
+      Cauchy:
+          - rate: 1/median
+          - shape: γ (https://en.wikipedia.org/wiki/Cauchy_distribution)
       
 
       
-Note that monotolically decreasing distribution, such as Weibull ($\alpha < 1$), gamma ($\alpha < 1$) or power laws, are not available in the current implementation of this repository, as theses can be more elegantly and efficiently simulated with the Laplace Gillespie algorithm [2]. Feel free to drop me an email if you would be interrested in adding the Laplace Gillespie to this repository, or adding a new distribution of your interrest.
+Note that monotolically decreasing distribution, such as Weibull (k < 1), gamma (α < 1) or power laws, are not available in the current implementation of this repository, as theses can be more elegantly and efficiently simulated with the Laplace Gillespie algorithm [2]. Feel free to drop me an email if you would be interrested in adding the Laplace Gillespie to this repository, or adding a new distribution of your interrest.
         
         
 ### Running the code
