@@ -11,7 +11,7 @@ Discrete stochastic processes are widespread in both nature and human-made syste
         
 ### Simulating a non-Markovian system
 
-A simple example of a non-Markovian Gillepsie simulation is provided bellow. Keep in mind that non-Markovian simulations are only available for reaction chanels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a chanel is defined with 0 or more than one reactant, it will be considered as a Poisson process. Simple examples, as well as the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the example folder. 
+A simple example of a non-Markovian Gillepsie simulation is provided below. Keep in mind that non-Markovian simulations are only available for reaction chanels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a chanel is defined with 0 or more than one reactant, it will be considered as a Poisson process. Simple examples, as well as the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the example folder. 
 
 	import REGIR as gil
 
