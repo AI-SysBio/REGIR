@@ -111,9 +111,6 @@ def main():
     mean_scores = np.array(mean_scores)
     std_scores = np.array(std_scores)
     
-    np.save('mean_scores.npy',mean_scores)
-    np.save('std_scores.npy',std_scores)
-    
     if len(alpha_list) > 2:
         plt.plot(alpha_list,mean_scores,'o-', color = 'black', lw = 2)
         plt.fill_between(alpha_list,mean_scores - std_scores, mean_scores + std_scores, color = 'black', alpha = 0.3)
