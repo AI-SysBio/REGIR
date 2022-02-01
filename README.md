@@ -24,8 +24,8 @@ Then, you can directly run a non-Markovian simulation with this toy example (oth
 	class param:
 		Tend = 10		#Length of the simulation
 		N_simulations = 20	#The simulation results should be averaged over many trials
-		unit = 'h'		#Unit of time (is used for plotting purpose only)
-		timepoints = 100	#Number of timepoints to record (is used for plotting purpose only)
+		unit = 'h'		#Unit of time (used for plotting only)
+		timepoints = 100	#Number of timepoints to record (used for plotting only)
 
 	r1 = 1
 	r2 = 4
