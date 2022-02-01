@@ -14,13 +14,13 @@ alpha1 = 20
 alpha2 = 5
   
 #Define the reaction chanels:
-reaction1 = gil.Reaction_channel(param,rate=r1, shape_param=alpha1, distribution = 'Gamma')
+reaction1 = gil.Reaction_channel(param,rate=r1, shape_param=alpha1, distribution = 'Gamma', name = 'A -> B')
 reaction1.reactants = ['A']
 reaction1.products = ['B']	
-reaction2 = gil.Reaction_channel(param,rate=r2, shape_param=alpha2, distribution = 'Weibull')
+reaction2 = gil.Reaction_channel(param,rate=r2, shape_param=alpha2, distribution = 'Weibull', name = 'A -> A+C')
 reaction2.reactants = ['B']
-reaction2.products = ['C','A']	
-reaction3 = gil.Reaction_channel(param,rate=r3)
+reaction2.products = ['A','C']	
+reaction3 = gil.Reaction_channel(param,rate=r3, name = 'A + B -> 0')
 reaction3.reactants = ['A','B']
 reaction3.products = []
 	

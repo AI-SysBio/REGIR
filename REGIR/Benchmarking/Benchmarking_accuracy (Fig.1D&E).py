@@ -32,6 +32,9 @@ class param:
 
 def main():
     
+    if not os.path.isdir("Computed"):
+        os.makedirs("Computed")
+    
     """
     #quick check of the abckground intrisic to EMD
     n = 10000
@@ -41,9 +44,6 @@ def main():
     EMD,std = emd_av(y1, y2)  
     print(EMD*100)
     """
-    
-    
-    
 
     N_list = np.logspace(0,7,num = 8, base=2).astype(int)
 
@@ -51,8 +51,8 @@ def main():
     if recompute_accuracy:
         compute_EMD(N_list)
     
-    EMDrej = np.load('EMDrej.npy')   
-    EMD1 = np.load('EMD1.npy')
+    EMDrej = np.load('Computed/EMDrej.npy')   
+    EMD1 = np.load('Computed/EMD1.npy')
 
     plt.figure(figsize = (8,3.5))
     plt.plot(N_list, EMD1, 'o-', markersize=8, linestyle='dashed', color = sns.color_palette()[4], label = r'REGIR ($\lambda_{max} \geq \lambda_0$)')

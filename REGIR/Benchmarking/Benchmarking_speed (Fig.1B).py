@@ -26,20 +26,21 @@ class param:
     timepoints = 100            #Number of timepoints to record (make surethat this number isnt too big)
 
 def main():
+    
+    if not os.path.isdir("Computed"):
+        os.makedirs("Computed")    
+    
     N_list = np.logspace(3,18,num = 16, base=2).astype(int)
     
     recompute_time_complexity = False
     if recompute_time_complexity:
         compute_time_complexity(N_list)
     
-    time_Exp = np.load('time_EXP.npy')
-    time_REGIR = np.load('time_REGIR.npy')
-    time_nMGA = np.load('time_nMGA.npy')
+    time_Exp = np.load('Computed/time_EXP.npy')
+    time_REGIR = np.load('Computed/time_REGIR.npy')
+    time_nMGA = np.load('Computed/time_nMGA.npy')
     
-    #time_nMGA = np.array([0.0800621000,0.367517000,1.28012000,4.93146800,17.7352620,97.6663530, 3.53343002e+02, 1.30758699e+03, 5.16693849e+03, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan])
-    #time_REGIR = np.array([1.38576000e-01, 2.79990000e-01, 5.51963000e-01, 1.188415000e+00, 2.27323500e+00, 5.2836460e+00, 1.09630070e+01, 1.67750130e+01,3.28149910e+01, 7.21816420e+01, 1.26181540e+02, 2.57781622e+02, 4.71099330e+02, 1.21256787e+03, 2.20974554e+03, 4.47487488e+03])
-    #time_Exp = np.array([5.36930000e-02, 1.065360000e-01, 2.09594000e-01, 4.08914000e-01, 7.82378000e-01, 1.67291500e+00, 3.59508100e+00, 6.93443900e+00, 1.26704890e+01, 2.35766060e+01, 4.58852610e+01, 8.79955970e+01, 1.88073875e+02, 3.83659120e+02, 6.59597018e+02, 1.45400972e+03])
-    
+
     time_nMGA = np.append(time_nMGA,np.nan)
     time_nMGA = np.append(time_nMGA,np.nan)
     time_nMGA = np.append(time_nMGA,np.nan)

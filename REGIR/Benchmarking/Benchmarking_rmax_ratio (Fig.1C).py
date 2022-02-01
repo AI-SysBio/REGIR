@@ -26,6 +26,10 @@ class param:
 
 
 def main():
+    
+    if not os.path.isdir("Computed"):
+        os.makedirs("Computed")    
+
     shape_param_list = np.linspace(1,15,num = 10)
     shape_param_list_2 = np.logspace(-1,0,base=10,num=10)[::-1]
     
@@ -33,10 +37,10 @@ def main():
     if recompute_time_complexity:
         compute_rmax_ratio(shape_param_list,shape_param_list_2)
     
-    ratio_weibull = np.load('Ratio_weibull.npy')   
-    ratio_gamma = np.load('Ratio_gamma.npy')
-    ratio_normal = np.load('Ratio_normal.npy')
-    ratio_lognormal = np.load('Ratio_lognormal.npy')
+    ratio_weibull = np.load('Computed/Ratio_weibull.npy')   
+    ratio_gamma = np.load('Computed/Ratio_gamma.npy')
+    ratio_normal = np.load('Computed/Ratio_normal.npy')
+    ratio_lognormal = np.load('Computed/Ratio_lognormal.npy')
     
     
     fitted_weibull = fit_line(shape_param_list,ratio_weibull)
