@@ -9,8 +9,8 @@ from scipy.stats import expon, weibull_min
 import os,sys
 from datetime import datetime
 
-import lib_nMGA as gil_nMGA
-import lib_REGIR as gil_REGIR
+import nMGA as gil_nMGA
+import REGIR as gil_REGIR
 
 
 """ --------------------------------------------------------------------------------------------

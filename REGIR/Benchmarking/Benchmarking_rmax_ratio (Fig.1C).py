@@ -9,7 +9,7 @@ from scipy import stats
 from scipy.optimize import curve_fit
 import os,sys
 
-import lib_REGIR as gil_REGIR
+import REGIR as gil_REGIR
 
 
 """ --------------------------------------------------------------------------------------------

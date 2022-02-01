@@ -10,7 +10,7 @@ import os,sys
 from datetime import datetime
 
 from pyemd import emd_samples
-import lib_REGIR as gil_REGIR
+import REGIR as gil_REGIR
 
 
 """ --------------------------------------------------------------------------------------------
