@@ -16,7 +16,7 @@ First, you need to install REGIR, or you can use the python file provided in the
 	- pip install REGIR
 
 
-Then, you can directly run a non-Markovian simulation with this toy example:
+Then, you can directly run a non-Markovian simulation with this toy example (other examples, including the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the `/Examples` folder.):
 
 	import REGIR as gil
 
@@ -59,13 +59,12 @@ Then, you can directly run a non-Markovian simulation with this toy example:
 	G_simul.plot_inter_event_time_distribution()
 	G_simul.plot_populations()
 
-The algorithm run for a few seconds and output the following figures (Note that you can disables all printing and plotting by passing the argument `verbose = False` when running the simulation):
+The algorithm run for a few seconds and output the following figures (note that you can disables all printing and plotting by passing the argument `verbose = False` when running the simulation):
 <p align="center">
   <img src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR_test.png" width=800>
 </p>
 
-Keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a channel is defined without or with more than one reactant, it will be considered as a Poisson process. Other examples, including the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the `/Examples` folder. 
-
+agga
       
 ### Implemented distributions
 With the current implementation, each distributions are characterised by their rate and a shape parameter as follow:
@@ -96,7 +95,8 @@ With the current implementation, each distributions are characterised by their r
       
 
       
-Note that monotolically decreasing distributions, such as Weibull (k < 1), gamma (α < 1) or power laws, are not available in the current implementation of this repository, as these can be more elegantly and efficiently simulated with the Laplace Gillespie algorithm [2]. Feel free to drop me an email if you would be interrested in me adding the Laplace Gillespie or any other distributions of your interrest to this implementation.
+Note that monotolically decreasing distributions, such as Weibull (k < 1), gamma (α < 1) or power laws, are not available in the current implementation of this repository, as these can be more elegantly and efficiently simulated with the Laplace Gillespie algorithm [2]. Feel free to drop me an email if you would be interrested in me adding the Laplace Gillespie or any other distributions of your interrest to this implementation. Also, keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a channel is defined without or with more than one reactant, it will be considered as a Poisson process.  
+
 
 
 ## References
