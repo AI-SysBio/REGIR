@@ -19,12 +19,15 @@ With the current implementation, each distributions are characterised by their r
       LogNormal:
           - rate: 1/mean
           - shape: std/mean
+          
       Gamma:
           - rate: 1/mean
           - shape: α >= 1 (https://en.wikipedia.org/wiki/Gamma_distribution)
+          
       Weibull:
           - rate: 1/mean
           - shape: k >= 1 (https://en.wikipedia.org/wiki/Weibull_distribution)
+          
       Cauchy:
           - rate: 1/median
           - shape: γ (https://en.wikipedia.org/wiki/Cauchy_distribution)
