@@ -41,8 +41,7 @@ A simple example of a non-Markovian Gillepsie simulation is provided below. Keep
 	reaction3.reactants = ['A','B']
 	reaction3.products = []
 		
-	reaction_channel_list = [EE_differentiation,EN_differentiation]
-
+	
 	#Define the initial population of reactants:
 	N_init = dict()
 	N_init['A'] = 100
@@ -50,6 +49,7 @@ A simple example of a non-Markovian Gillepsie simulation is provided below. Keep
 	N_init['C'] = 0
 
 	#Initialize and run the Gillepsie simulation:
+	reaction_channel_list = [reaction1, reaction2, reaction3]
 	G_simul = gil.Gillespie_simulation(N_init,param)
 	G_simul.reaction_channel_list = reaction_channel_list
 	G_simul.run_simulations(param.Tend)
