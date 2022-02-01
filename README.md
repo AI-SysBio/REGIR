@@ -28,10 +28,10 @@ Then, you can directly run a non-Markovian simulation with this toy example (oth
 		timepoints = 100	#Number of timepoints to record (make surethat this number isnt too big)
 
 	r1 = 1
-	r2 = 2
-	r3 = 0.5
-	alpha1 = 6
-	alpha2 = 2
+	r2 = 4
+	r3 = 0.03
+	alpha1 = 20
+	alpha2 = 5
       
 	#Define the reaction chanels:
 	reaction1 = gil.Reaction_channel(param,rate=r1, shape_param=alpha1, distribution = 'Gamma')
@@ -47,7 +47,7 @@ Then, you can directly run a non-Markovian simulation with this toy example (oth
 	
 	#Define the initial population of reactants:
 	N_init = dict()
-	N_init['A'] = 100
+	N_init['A'] = 300
 	N_init['B'] = 0
 	N_init['C'] = 0
 
@@ -64,7 +64,7 @@ The algorithm run for a few seconds and output the following figures (note that 
   <img src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR_test.png" width=800>
 </p>
 
-agga
+The oscillations resulting from the markovian dynamics are clearly visible. If you check carefully, you will notice that the theoretical distribution do not match exactly the simulated distribution. This happens because reactant A is both a reactant and a product at the same time (reaction 1 & 2). In practice, this occur frequently in non-Markovian systems, so don't worry if the distributions doesn't match.
       
 ### Implemented distributions
 With the current implementation, each distributions are characterised by their rate and a shape parameter as follow:
