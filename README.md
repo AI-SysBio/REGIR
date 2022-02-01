@@ -16,7 +16,7 @@ First, you need to install REGIR, or you can use the python file provided in the
 	- pip install REGIR
 
 
-A simple example of a non-Markovian Gillepsie simulation is provided below. Keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a channel is defined with 0 or more than one reactant, it will be considered as a Poisson process. Simple examples, as well as the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the `/Examples` folder. 
+Then, you can directly run a non-Markovian simulation with thistoy example:
 
 	import REGIR as gil
 
@@ -59,7 +59,7 @@ A simple example of a non-Markovian Gillepsie simulation is provided below. Keep
 	G_simul.plot_inter_event_time_distribution()
 	G_simul.plot_populations()
 
-
+Keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a channel is defined with 0 or more than one reactant, it will be considered as a Poisson process. other examples, including the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the `/Examples` folder. 
 
       
 ### Implemented distributions
