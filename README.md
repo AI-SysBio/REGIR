@@ -11,7 +11,7 @@ Discrete stochastic processes are widespread in both nature and human-made syste
         
 ### Simulating a non-Markovian system
 
-First, you need to install REGIR, orcan use the python file provided in that folder:
+First, you need to install REGIR, or you can use the python file provided in the repository:
 
 	- pip install REGIR
 
