@@ -16,7 +16,7 @@ First, you need to install REGIR, or you can use the `REGIR.py` file provided in
 	- pip install REGIR
 
 
-Then, you can directly run a non-Markovian simulation with this toy example (other examples, including the three biochemical systems described in the paper: Cell division, differentiation and RNA transcription, are provided in the `/Examples` folder.):
+Then, you can directly run a non-Markovian simulation with this toy example (other examples, including the three biochemical systems described in the paper: Cell division, differentiation and RNA transcription, are provided in the `/REGIR/Examples` folder.):
 
 	import REGIR as gil
 
@@ -64,7 +64,7 @@ The algorithm run for a few seconds and output the following figures (note that 
   <img src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR_test.png" width=800>
 </p>
 
-The oscillations resulting from the markovian dynamics are clearly visible. If you check carefully, you will notice that the *theoretical distributions* do not match exactly the *simulated distributions*, even if you increase the number of simulations. This happens because reactants A and B are reactants of two reaction channels at the same time, and the *theoretical distribution* only represent the inter-event time distribution that **the reaction channel would have if it was the only process interaction with that reactant**. In practice, these kind of situations will occur frequently in non-Markovian systems, so do not worry if the simulated and theoretical distributions do not match exactly. The accuracy of REGIR was rigourously demonstrated in [1] (see the `/Benchmark` folder).
+The oscillations resulting from the markovian dynamics are clearly visible. If you check carefully, you will notice that the *theoretical distributions* do not match exactly the *simulated distributions*, even if you increase the number of simulations. This happens because reactants A and B are reactants of two reaction channels at the same time, and the *theoretical distribution* only represent the inter-event time distribution that **the reaction channel would have if it was the only process interaction with that reactant**. In practice, these kind of situations will occur frequently in non-Markovian systems, so do not worry if the simulated and theoretical distributions do not match exactly. The accuracy of REGIR was rigourously demonstrated in [1] (see the `/REGIR/Benchmark` folder).
       
 ### Implemented distributions
 With the current implementation, each available distribution are characterised by their rate and a shape parameter as follow:
