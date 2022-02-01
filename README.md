@@ -1,7 +1,7 @@
-# A Probabilistic model of the Germinal Center reaction
+# A Scalable Gillespie Algorithm for non-Markovian Stochastic Simulations
 
 <img align="right" src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR.png" width=400>
-Germinal centers (GCs) are specialized compartments within the secondary lymphoid organs where B cells proliferate, differentiate, and mutate their antibody genes in response to the presence of foreign antigens. Through the GC lifespan, interclonal competition between B cells leads to increased affinity of the B cell receptors for antigens accompanied by a loss of clonal diversity. This repository contains the python implementation of a quantitative stochastic model of the GC reaction, that explicitly models B cell receptors as sequences of nucleotides undergoing random somatic mutations [1].
+Discrete stochastic processes are widespread in both nature and human-made systems, with applications across physics, biochemistry, epidemiology, social patterns and finance, just to name a few. In the simplest case, these processes are memoryless (or Markovian), with future occurrences predictable based solely on the present state of the system and with exponentially distributed interevent times. However, stochastic systems describing majority of applications are empirically known to exhibit properties of memory, an inherently non-Markovian feature. Unfortunately, non-Markovian stochastic processes are notoriously difficult to tackle analytically,  and existing numerical methods either suffer from a high computational cost or are only applicable to a narrow selection  of  probability  distributions  that  do  not match  the  empirically observed distribution in many systems. To address this issue, this repository contains an implementattion of a general and scalable framework to simulate non-Markovian stochastic systems with arbitrary inter-event time distribution and accuracy. The algorithm is referred to as the Rejection Gillespie algorithm for non-Markovian Reactions (REGIR) [1].
 
 &nbsp;
 
@@ -39,8 +39,4 @@ To launch the simulation, run `main.py`. Running the program requires python3 wi
 
 ## References
 
-[1] A. Pelissier, Y. Akrout, K. Jahn, J. Kuipers, U. Klein, N. Beerenwinke, M. Rodríguez Martínez. Computational model reveals a stochastic mechanism behind germinal center clonal bursts. *Cells*. 2020.
-
-[2] MJ. Thomas, U. Klein, J. Lygeros, M. Rodríguez Martínez.  A probabilistic model of the germinal center reaction. *Frontiers in immunology*. 2019.
-
-
+[1] Pélissier, A, Phan, M, et al. Practical and scalable simulations of non-Markovian stochastic processes. Proceedings of the National Academy of Sciences (2022)
