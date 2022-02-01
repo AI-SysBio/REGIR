@@ -6,7 +6,7 @@ Discrete stochastic processes are widespread in both nature and human-made syste
 &nbsp;
 
 
-The algorithm efficiency and accuracy lies in its rejection approach, whereby processes that include undesired reactions are computed and subsequently rejected. See the corresponding paper for details. With the current implementation, each distributions are characterised by their rate and a shape parameter as follow:
+With the current implementation, each distributions are characterised by their rate and a shape parameter as follow:
 
       Exponential:
           - rate: 1/mean
