@@ -55,11 +55,14 @@ Then, you can directly run a non-Markovian simulation with this toy example:
 	reaction_channel_list = [reaction1, reaction2, reaction3]
 	G_simul = gil.Gillespie_simulation(N_init,param)
 	G_simul.reaction_channel_list = reaction_channel_list
-	G_simul.run_simulations(param.Tend)
+	G_simul.run_simulations(param.Tend, verbose = True)
 	G_simul.plot_inter_event_time_distribution()
 	G_simul.plot_populations()
 
-Keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a channel is defined without or with more than one reactant, it will be considered as a Poisson process. Other examples, including the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the `/Examples` folder. 
+The algorithm runs a few seconds and output the following figures:
+<img src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR_test.png" width=800>
+
+Note that you can disables all printing by passing the argument `verbose = False` when running the simulation. Keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a channel is defined without or with more than one reactant, it will be considered as a Poisson process. Other examples, including the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the `/Examples` folder. 
 
       
 ### Implemented distributions
