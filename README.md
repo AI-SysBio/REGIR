@@ -1,46 +1,101 @@
-# A Probabilistic model of the Germinal Center reaction
+# REGIR: A Scalable Gillespie Algorithm for non-Markovian Stochastic Simulations
 
-<img align="right" src="https://raw.githubusercontent.com/Aurelien-Pelissier/GerminalCenter/master/GC.png" width=400>
-Germinal centers (GCs) are specialized compartments within the secondary lymphoid organs where B cells proliferate, differentiate, and mutate their antibody genes in response to the presence of foreign antigens. Through the GC lifespan, interclonal competition between B cells leads to increased affinity of the B cell receptors for antigens accompanied by a loss of clonal diversity. This repository contains the python implementation of a quantitative stochastic model of the GC reaction, that explicitly models B cell receptors as sequences of nucleotides undergoing random somatic mutations [1].
+<img align="right" src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR.png" width=400>
+Discrete stochastic processes are widespread in both nature and human-made systems, with applications across physics, biochemistry, epidemiology, social patterns and finance, just to name a few. In the majority of these systems, the dynamics cannot be properly described with memoryless (or Markovian) interactions, and thus require the use of numerical tools for analyzing these non-Markovian dynamics. This repository contains an implementattion of a general and scalable framework to simulate non-Markovian stochastic systems with arbitrary inter-event time distribution and accuracy. The algorithm is referred to as the Rejection Gillespie algorithm for non-Markovian Reactions (REGIR) [1].
 
 &nbsp;
 
 
-The model is based on a system of 11 stochastic interactions, implemented with a modified Gillepsie algorithm that can account for the individual properties of each agents [2].
 
-      8 types of reactants are considered:
-      - Centroblast (Dark Zone) = CB
-      - Centrocytes (Light Zone) = CC
-      - Selected Centrocytes (Light Zone) = CCsel
-      - Bound Centrocytes (Light Zone) = [CCTC]
-      - Free T follicular helper (Light Zone) = Tfh
-        (Plus 3 additional cell types, leaving the GC)
-      - Memory cells (Outside GC) = MBC
-      - Plasma cells (Outside GC) = PC
-      - Dead cells = 0 
+        
+        
+### Simulating a non-Markovian system
+
+First, you need to install REGIR, or you can use the python file provided in the repository:
+
+	- pip install REGIR
+
+
+Then, you can directly run a non-Markovian simulation with this toy example:
+
+	import REGIR as gil
+
+	#Set the simulation parameters:
+	class param:
+		Tend = 10		#Length of the simulation
+		unit = 'h'		#Unit of time (is used for plotting purpose only)
+		N_simulations = 20	#The simulation results should be averaged over many trials
+		timepoints = 100	#Number of timepoints to record (make surethat this number isnt too big)
+
+	r1 = 1
+	r2 = 2
+	r3 = 0.5
+	alpha1 = 6
+	alpha2 = 2
       
-      11 reactions are considered:
-      - Cell entering the GC:        0 -> CB
-      - Centrocyte apoptosis:        CC -> 0
-      - Centroblast migration:       CB -> CC
-      - Centrocyte unbinding:        [CCTC] -> CC + TC
-      - Centrocyte recirculation:    CC -> CB
-      - Centrocyte exit:             CC -> MBC or PC
-      - Centrocyte Tfh binding:      CC + TC = [CCTC]
-      - Tfh switch:                  [CC1TC] + CC2 -> CC1 + [CC2TC]
-      - Centroblast division:        CB -> 2CB
-      - Centroblast apoptosis:       CB -> 0
-      - Centrocyte antigen uptake:   CC -> CC
-        
-        
-### Running the code
-To launch the simulation, run `main.py`. Running the program requires python3 with its standard libraries such as numpy or matplotlib. The program plot the simulation results from the model, along with the experimental data from litterature, available in the folder `Exp_data/`. One Gillespie GC run should take less than 1min.
+	#Define the reaction chanels:
+	reaction1 = gil.Reaction_channel(param,rate=r1, shape_param=alpha1, distribution = 'Gamma')
+	reaction1.reactants = ['A']
+	reaction1.products = ['B']	
+	reaction2 = gil.Reaction_channel(param,rate=r2, shape_param=alpha2, distribution = 'Weibull')
+	reaction2.reactants = ['B']
+	reaction2.products = ['C','A']	
+	reaction3 = gil.Reaction_channel(param,rate=r3)
+	reaction3.reactants = ['A','B']
+	reaction3.products = []
+		
+	
+	#Define the initial population of reactants:
+	N_init = dict()
+	N_init['A'] = 100
+	N_init['B'] = 0
+	N_init['C'] = 0
+
+	#Initialize and run the Gillepsie simulation:
+	reaction_channel_list = [reaction1, reaction2, reaction3]
+	G_simul = gil.Gillespie_simulation(N_init,param)
+	G_simul.reaction_channel_list = reaction_channel_list
+	G_simul.run_simulations(param.Tend)
+	G_simul.plot_inter_event_time_distribution()
+	G_simul.plot_populations()
+
+Keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a channel is defined without or with more than one reactant, it will be considered as a Poisson process. Other examples, including the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the `/Examples` folder. 
+
+      
+### Implemented distributions
+With the current implementation, each distributions are characterised by their rate and a shape parameter as follow:
+
+      Exponential:
+          - rate: 1/mean
+          - shape parameter: None
+      
+      Normal:
+          - rate: 1/mean
+          - shape: std/mean
+      
+      LogNormal:
+          - rate: 1/mean
+          - shape: std/mean
+          
+      Gamma:
+          - rate: 1/mean
+          - shape: α >= 1 (https://en.wikipedia.org/wiki/Gamma_distribution)
+          
+      Weibull:
+          - rate: 1/mean
+          - shape: k >= 1 (https://en.wikipedia.org/wiki/Weibull_distribution)
+          
+      Cauchy:
+          - rate: 1/median
+          - shape: γ (https://en.wikipedia.org/wiki/Cauchy_distribution)
+      
+
+      
+Note that monotolically decreasing distributions, such as Weibull (k < 1), gamma (α < 1) or power laws, are not available in the current implementation of this repository, as these can be more elegantly and efficiently simulated with the Laplace Gillespie algorithm [2]. Feel free to drop me an email if you would be interrested in me adding the Laplace Gillespie or any other distributions of your interrest to this implementation.
 
 
 ## References
 
-[1] A. Pelissier, Y. Akrout, K. Jahn, J. Kuipers, U. Klein, N. Beerenwinke, M. Rodríguez Martínez. Computational model reveals a stochastic mechanism behind germinal center clonal bursts. *Cells*. 2020.
+[1] Pélissier, A, Phan, M, et al. Practical and scalable simulations of non-Markovian stochastic processes. Proceedings of the National Academy of Sciences (2022)
 
-[2] MJ. Thomas, U. Klein, J. Lygeros, M. Rodríguez Martínez.  A probabilistic model of the germinal center reaction. *Frontiers in immunology*. 2019.
-
-
+[2] Masuda, Naoki, and Luis EC Rocha. "A Gillespie algorithm for non-Markovian stochastic processes." Siam Review 60.1 (2018): 95-115.
