@@ -37,8 +37,19 @@ With the current implementation, each distributions are characterised by their r
 Note that monotolically decreasing distributions, such as Weibull (k < 1), gamma (α < 1) or power laws, are not available in the current implementation of this repository, as theses can be more elegantly and efficiently simulated with the Laplace Gillespie algorithm [2]. Feel free to drop me an email if you would be interrested in adding the Laplace Gillespie, or any other distributions of your interrest, to this repository.
         
         
-### Running the code
-To launch the simulation, run `main.py`. Running the program requires python3 with its standard libraries such as numpy or matplotlib. The program plot the simulation results from the model, along with the experimental data from litterature, available in the folder `Exp_data/`. One Gillespie GC run should take less than 1min.
+### Simulating a non-Markovian system
+
+To launch a Gillespie simulation, we do as follow:
+
+      GAGAG
+          - rate: 1/mean
+          - shape parameter: None
+      
+      Normal:
+          - rate: 1/mean
+          - shape: std/mean
+
+Keep in mind that non-Markovian simulations are only available for reaction chanels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a chanel is defined with 0 or more than one reactant, it will be considered as a Poisson process. Simple examples, as well as the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the example folder. 
 
 
 ## References
