@@ -13,49 +13,49 @@ Discrete stochastic processes are widespread in both nature and human-made syste
 
 A simple example of a non-Markovian Gillepsie simulation is provided below. Keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a chanel is defined with 0 or more than one reactant, it will be considered as a Poisson process. Simple examples, as well as the three biochemical systems described in the paper (Cell division, differentiation and RNA transcription) are provided in the example folder. 
 
-	import REGIR as gil
+		import REGIR as gil
 
-	"""Set the simulation parameters"""
-	class param:
-		Tend = 10					#length of the simulation
-		unit = 'h'					#unit of time (is used for plotting purpose only)
-		rd.seed(101)                #length of the simulation, in hours (41 days)
-		N_simulations = 20          #The simulation results should be averaged over many trials
-		timepoints = 100            #Number of timepoints to record (make surethat this number isnt too big)
+		"""Set the simulation parameters"""
+		class param:
+			Tend = 10					#length of the simulation
+			unit = 'h'					#unit of time (is used for plotting purpose only)
+			rd.seed(101)                #length of the simulation, in hours (41 days)
+			N_simulations = 20          #The simulation results should be averaged over many trials
+			timepoints = 100            #Number of timepoints to record (make surethat this number isnt too big)
 
-    r1 = 1
-    r2 = 2
-    r3 = 0.5
-    alpha1 = 6
-    alpha2 = 2
-      
-	"""Define the reaction chanels"""
-	reaction1 = gil.Reaction_channel(param,rate=r1, shape_param=alpha1, distribution = 'Gamma')
-	reaction1.reactants = ['A']
-	reaction1.products = ['B']
-		
-	reaction2 = gil.Reaction_channel(param,rate=r2, shape_param=alpha2, distribution = 'Weibull')
-	reaction2.reactants = ['B']
-	reaction2.products = ['C','A']
-		
-	reaction3 = gil.Reaction_channel(param,rate=r3)
-	reaction3.reactants = ['A','B']
-	reaction3.products = []
-		
-	reaction_channel_list = [EE_differentiation,EN_differentiation]
+		r1 = 1
+		r2 = 2
+		r3 = 0.5
+		alpha1 = 6
+		alpha2 = 2
+		  
+		"""Define the reaction chanels"""
+		reaction1 = gil.Reaction_channel(param,rate=r1, shape_param=alpha1, distribution = 'Gamma')
+		reaction1.reactants = ['A']
+		reaction1.products = ['B']
+			
+		reaction2 = gil.Reaction_channel(param,rate=r2, shape_param=alpha2, distribution = 'Weibull')
+		reaction2.reactants = ['B']
+		reaction2.products = ['C','A']
+			
+		reaction3 = gil.Reaction_channel(param,rate=r3)
+		reaction3.reactants = ['A','B']
+		reaction3.products = []
+			
+		reaction_channel_list = [EE_differentiation,EN_differentiation]
 
-	"""Define the initial population of reactants"""
-	N_init = dict()
-    N_init['A'] = 100
-    N_init['B'] = 0
-    N_init['C'] = 0
+		"""Define the initial population of reactants"""
+		N_init = dict()
+		N_init['A'] = 100
+		N_init['B'] = 0
+		N_init['C'] = 0
 
-    """Initialize and run the Gillepsie simulation"""
-    G_simul = gil.Gillespie_simulation(N_init,param)
-    G_simul.reaction_channel_list = reaction_channel_list
-    G_simul.run_simulations(param.Tend)
-    G_simul.plot_inter_event_time_distribution()
-    G_simul.plot_populations()
+		"""Initialize and run the Gillepsie simulation"""
+		G_simul = gil.Gillespie_simulation(N_init,param)
+		G_simul.reaction_channel_list = reaction_channel_list
+		G_simul.run_simulations(param.Tend)
+		G_simul.plot_inter_event_time_distribution()
+		G_simul.plot_populations()
       
 ### Implemented distributions
 With the current implementation, each distributions are characterised by their rate and a shape parameter as follow:
