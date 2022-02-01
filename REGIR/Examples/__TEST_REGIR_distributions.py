@@ -1,12 +1,8 @@
 import numpy as np
-import pandas as pd
 import random as rd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import random
-from math import log, gamma
-from scipy.stats import expon, weibull_min
-import os,sys
 
 import REGIR as gil
 
