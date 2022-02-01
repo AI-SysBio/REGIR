@@ -23,11 +23,11 @@ A simple example of a non-Markovian Gillepsie simulation is provided below. Keep
 		N_simulations = 20          #The simulation results should be averaged over many trials
 		timepoints = 100            #Number of timepoints to record (make surethat this number isnt too big)
 
-      r1 = 1
-      r2 = 2
-      r3 = 0.5
-      alpha1 = 6
-      alpha2 = 2
+        r1 = 1
+        r2 = 2
+        r3 = 0.5
+        alpha1 = 6
+        alpha2 = 2
       
 	"""Define the reaction chanels"""
 	reaction1 = gil.Reaction_channel(param,rate=r1, shape_param=alpha1, distribution = 'Gamma')
@@ -46,16 +46,16 @@ A simple example of a non-Markovian Gillepsie simulation is provided below. Keep
 
 	"""Define the initial population of reactants"""
 	N_init = dict()
-      N_init['A'] = 100
-      N_init['B'] = 0
-      N_init['C'] = 0
+        N_init['A'] = 100
+        N_init['B'] = 0
+        N_init['C'] = 0
 
-      """Initialize and run the Gillepsie simulation"""
-	G_simul = gil.Gillespie_simulation(N_init,param)
-	G_simul.reaction_channel_list = reaction_channel_list
-      G_simul.run_simulations(param.Tend)
-      G_simul.plot_inter_event_time_distribution()
-      G_simul.plot_populations()
+        """Initialize and run the Gillepsie simulation"""
+        G_simul = gil.Gillespie_simulation(N_init,param)
+        G_simul.reaction_channel_list = reaction_channel_list
+        G_simul.run_simulations(param.Tend)
+        G_simul.plot_inter_event_time_distribution()
+        G_simul.plot_populations()
       
 ### Implemented distributions
 With the current implementation, each distributions are characterised by their rate and a shape parameter as follow:
