@@ -16,7 +16,7 @@ First, you need to install REGIR, or you can use the python file provided in the
 	- pip install REGIR
 
 
-Then, you can directly run a non-Markovian simulation with thistoy example:
+Then, you can directly run a non-Markovian simulation with this toy example:
 
 	import REGIR as gil
 
