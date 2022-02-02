@@ -2,13 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import random
-import copy
 import uuid
 import scipy.stats as stat
-from math import log, gamma, exp, factorial, pi, sqrt, erf, atan
+from math import log, gamma, exp, pi, sqrt, erf, atan
 from scipy.special import gammainc
 from scipy.interpolate import interp1d
-import os,sys
 
 
 
