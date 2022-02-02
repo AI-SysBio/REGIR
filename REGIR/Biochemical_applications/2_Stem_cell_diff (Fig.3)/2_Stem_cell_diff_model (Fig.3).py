@@ -29,10 +29,10 @@ def main():
     print("=========================== Rejection Gillepsie algorithm =========================") 
     print("=================================================================================\n\n")                 
 
-    r_diffAB = 0.032
-    r_diffBC  = 0.017
-    alpha_diffAB = 4.41
-    alpha_diffBC =  4.61
+    r_diffAB = 0.0339
+    r_diffBC  = 0.0164
+    alpha_diffAB = 27.60
+    alpha_diffBC =  39.29
     
 
     #initialise reactants
@@ -42,11 +42,11 @@ def main():
     N_init['NPC'] = 0
     
     #initialise reaction channels
-    EE_differentiation = gil.Reaction_channel(param,rate=r_diffAB, shape_param=alpha_diffAB, name='Differentiation: ESC -> EPI')
+    EE_differentiation = gil.Reaction_channel(param,rate=r_diffAB, shape_param=alpha_diffAB, distribution = 'Gamma', name='Differentiation: ESC -> EPI')
     EE_differentiation.reactants = ['ESC']
     EE_differentiation.products = ['EPI']
     
-    EN_differentiation = gil.Reaction_channel(param,rate=r_diffBC, shape_param=alpha_diffBC, name='Differentiation: EPI -> NPC')
+    EN_differentiation = gil.Reaction_channel(param,rate=r_diffBC, shape_param=alpha_diffBC, distribution = 'Gamma', name='Differentiation: EPI -> NPC')
     EN_differentiation.reactants = ['EPI']
     EN_differentiation.products = ['NPC']
     reaction_channel_list = [EE_differentiation,EN_differentiation]
