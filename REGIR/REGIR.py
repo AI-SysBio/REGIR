@@ -7,6 +7,7 @@ import scipy.stats as stat
 from math import log, gamma, exp, pi, sqrt, erf, atan
 from scipy.special import gammainc
 from scipy.interpolate import interp1d
+import sys
 
 
 
@@ -73,6 +74,23 @@ class counts:
     channel_numbers = 0
 
 class Reaction_channel():
+    
+    def __repr__(self):
+        return "Reaction_channel()"
+    
+    def __str__(self):
+        
+        print_str = ''
+        print_str += '\n    %s' % self.name
+        print_str += '\n      reactants = %s' % self.reactants
+        print_str += '\n      products = %s' % self.products
+        print_str += '\n      rate = %s' % self.rate
+        print_str += '\n      shape_parameter = %s' % self.shape_param
+        print_str += '\n      distribution = %s' % self.distribution
+        
+        return print_str
+
+        
     
     def __init__(self,param_simulation, rate=1, shape_param=1, distribution = 'Weibull', name='', reactants = [], products = [], transfer_identity = False):
         
@@ -208,6 +226,23 @@ class Reactant():
         
         
 class Gillespie_simulation():
+    
+    def __repr__(self):
+        return "Gillespie_simulation()"
+    
+    def __str__(self):
+        
+        print_str = ''
+        print_str += 'REGIR Gillespie model:'
+        print_str += '\n'
+        print_str += '\n  Initial population:'
+        print_str += '\n    %s' % self.reactant_population_init
+        print_str += '\n'
+        print_str += '\n  Reaction Channels:'
+        for ci in range(len(self.reaction_channel_list)):
+            print_str += '    %s\n' % self.reaction_channel_list[ci]
+        
+        return print_str
     
     def __init__(self, N_init, param, min_ratio = 10, print_warnings = False):
         self.param = param
@@ -701,13 +736,14 @@ def interpolate_minusones(y):
             last_value = y[idx[-1],ni]
             ynew[:,ni] = last_value
     return ynew
-        
-        
+
+
+
+
+
         
 if __name__ == "__main__":
     plt.rcParams.update({'font.size': 16})
-    #test = __import__('__TEST_REGIR_multiple_reactants')
-    test = __import__('__TEST_REGIR_distributions')
-    import random as rd
+    test = __import__('Examples/__TEST_REGIR_distributions')
     test.main()        
         
