@@ -35,6 +35,6 @@ N_init['C'] = 0
 reaction_channel_list = [reaction1, reaction2, reaction3]
 G_simul = gil.Gillespie_simulation(N_init,param)
 G_simul.reaction_channel_list = reaction_channel_list
-G_simul.run_simulations(param.Tend)
+populations = G_simul.run_simulations(param.Tend)
 G_simul.plot_inter_event_time_distribution()
 G_simul.plot_populations()
