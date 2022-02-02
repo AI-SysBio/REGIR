@@ -55,7 +55,7 @@ Then, you can directly run a non-Markovian simulation with this toy example (oth
 	reaction_channel_list = [reaction1, reaction2, reaction3]
 	G_simul = gil.Gillespie_simulation(N_init,param)
 	G_simul.reaction_channel_list = reaction_channel_list
-	G_simul.run_simulations(param.Tend, verbose = True)
+	populations = G_simul.run_simulations(param.Tend, verbose = True)
 	G_simul.plot_inter_event_time_distribution()
 	G_simul.plot_populations()
 
