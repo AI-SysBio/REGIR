@@ -16,7 +16,7 @@ First, you need to install REGIR, or you can use the `REGIR.py` file provided in
 	- pip install REGIR
 
 
-Then, you can directly run a non-Markovian simulation with this toy example (other examples, including the three biochemical systems described in the paper: Cell division, differentiation and RNA transcription, are provided in the `/Examples` folder.):
+Then, you can directly run a non-Markovian simulation with this toy example (other examples, including the three biochemical systems described in the paper: Cell division, differentiation and RNA transcription, are provided in the `/REGIR/Examples` folder.):
 
 	import REGIR as gil
 
@@ -59,12 +59,12 @@ Then, you can directly run a non-Markovian simulation with this toy example (oth
 	G_simul.plot_inter_event_time_distribution()
 	G_simul.plot_populations()
 
-The algorithm run for a few seconds and output the following figures (note that you can disables all printing and plotting by passing the argument `verbose = False` when running the simulation):
+The algorithm runs for a few seconds and output the following figures (note that you can disables all printing and plotting by passing the argument `verbose = False` when running the simulation):
 <p align="center">
   <img src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR_test.png" width=800>
 </p>
 
-The oscillations resulting from the markovian dynamics are clearly visible. If you check carefully, you will notice that the *theoretical distributions* do not match exactly the *simulated distributions*, even if you increase the number of simulations. This happens because reactants A and B are reactants of two reaction channels at the same time, and the *theoretical distribution* only represent the inter-event time distribution that the reaction channel would have if it was the only process interaction with that reactant. In practice, these kind of situations will occur frequently in non-Markovian systems, so do not worry if the simulated and theoretical distributions do not match exactly. The accuracy of REGIR was rigourously verified in [1] (see the `/Benchmark` folder).
+The oscillations resulting from the markovian dynamics are clearly visible. If you check carefully, you will notice that the *theoretical distributions* do not match exactly the *simulated distributions*, even if you increase the number of simulations. This happens because reactants A and B are reactants of two reaction channels at the same time, and the *theoretical distribution* only represent the inter-event time distribution that **the reaction channel would have if it was the only process interaction with that reactant**. In practice, these kind of situations will occur frequently in non-Markovian systems, so do not worry if the simulated and theoretical distributions do not match exactly. The accuracy of REGIR was rigourously demonstrated in [1] (see the `/REGIR/Benchmark` folder).
       
 ### Implemented distributions
 With the current implementation, each available distribution are characterised by their rate and a shape parameter as follow:
@@ -96,12 +96,12 @@ With the current implementation, each available distribution are characterised b
 
 Keep in mind that non-Markovian simulations are only available for reaction channels with a single reactant, as the definition of inter-event time distribution is ambigious for channels with multiple reactants. If a channel is defined without or with more than one reactant, it will be considered as a Poisson process. Also, note that monotolically decreasing distributions, such as Weibull (k < 1), gamma (α < 1) or power laws, are not available in the current implementation of this repository, as these can be more elegantly and efficiently simulated with the Laplace Gillespie algorithm [2]. 
 
-*Feel free to drop me an email if you would be interrested in me adding the Laplace Gillespie or any other distributions of your interrest to this implementation.* 
+*Feel free to drop me an email if you have interest in me adding the Laplace Gillespie or any other relevant distributions to this implementation.* 
 
 
 
 ## References
 
-[1] Pélissier, A, Phan, M, et al. Practical and scalable simulations of non-Markovian stochastic processes. Proceedings of the National Academy of Sciences (2022)
+[1] Pélissier, A, Phan, M, et al. "Practical and scalable simulations of non-Markovian stochastic processes". Proceedings of the National Academy of Sciences (2022)
 
 [2] Masuda, Naoki, and Luis EC Rocha. "A Gillespie algorithm for non-Markovian stochastic processes." Siam Review 60.1 (2018): 95-115.
