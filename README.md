@@ -101,7 +101,7 @@ Keep in mind that non-Markovian simulations are only available for reaction chan
 *Feel free to drop me an email if you have interest in me adding the Laplace Gillespie or any other relevant distributions to this implementation.* 
 
 
-### Customizing REGIR for your problem
+### Customizing REGIR for your system
 
 The REGIR framework offer countless possibilities and highly customizable models. However, with the current implementation, reactions propensities are always proportional to the number of reactant. For example, the reaction (A+B -> C) will have a propensity of *a = AxBxr*. In some problem, you will want to implement more complex formula for the reaction propensities, (such as for example *a = AxBxr/D*, where D is a parameter that evolves with the system). To do so, you can  directly modify the `REGIR/compute_propensities` function according to your need. Likewise, you might want to set up specific rejection rules if your reactants have some individual properties, and modify them appropriatly. To do so, first define your reactant properties in the `REGIR/Reactant` class, and then define your reaction specific rules in `REGIR/ perform_reaction`.
 
