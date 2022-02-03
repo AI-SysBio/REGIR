@@ -105,6 +105,8 @@ def Gillespie_kinetics(param_list, plot = True, plot_distrib = True, N_simulatio
     #initialise the Gillespie simulation
     G_simul = gil.Gillespie_simulation(N_init,param, print_warnings = True)
     G_simul.reaction_channel_list = reaction_channel_list
+    if plot:
+        print(G_simul)
     
     #run multiple Gillespie simulationand average them
     population = G_simul.run_simulations(Tend, verbose = plot)

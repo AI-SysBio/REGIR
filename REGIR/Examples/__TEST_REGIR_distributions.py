@@ -86,6 +86,7 @@ def main():
     #initialise the Gillespie simulation
     G_simul = gil.Gillespie_simulation(N_init,param, print_warnings = True)
     G_simul.reaction_channel_list = reaction_channel_list
+    print(G_simul)
     
     #run multiple Gillespie simulationand average them
     G_simul.run_simulations(param.Tend)

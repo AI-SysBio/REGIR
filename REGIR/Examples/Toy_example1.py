@@ -17,7 +17,7 @@ alpha2 = 5
 reaction1 = gil.Reaction_channel(param,rate=r1, shape_param=alpha1, distribution = 'Gamma', name = 'A -> B')
 reaction1.reactants = ['A']
 reaction1.products = ['B']	
-reaction2 = gil.Reaction_channel(param,rate=r2, shape_param=alpha2, distribution = 'Weibull', name = 'A -> A+C')
+reaction2 = gil.Reaction_channel(param,rate=r2, shape_param=alpha2, distribution = 'Weibull', name = 'A -> A + C')
 reaction2.reactants = ['B']
 reaction2.products = ['A','C']	
 reaction3 = gil.Reaction_channel(param,rate=r3, name = 'A + B -> 0')
@@ -35,6 +35,9 @@ N_init['C'] = 0
 reaction_channel_list = [reaction1, reaction2, reaction3]
 G_simul = gil.Gillespie_simulation(N_init,param)
 G_simul.reaction_channel_list = reaction_channel_list
+print(G_simul)
 populations = G_simul.run_simulations(param.Tend)
+
+#Plot the results:
 G_simul.plot_inter_event_time_distribution()
 G_simul.plot_populations()
