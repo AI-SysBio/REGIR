@@ -6,7 +6,7 @@ The Systems Biology Markup Language (SBML) is a format based on `.xml` and a sta
 	- pip install simplesbml
 	
 
-### Save REGIR model as SBML
+### Saving REGIR model as SBML
 You can store any of your models built with REGIR with the `get_model_in_SBML()` method. Note that in REGIR, the rate laws are always proportional to the number of reactants. For example, the reaction (A+B -> C) will have a propensity of *a = A x B x r*. Because the SBML format is originally designed only for Markovian processes, the additional parameters related the non-markovian processes such as the shape parameter or the type of distribution are stored in the `local_params` field of the reaction definition of `libSBML` (see source code for details about the implementation).
 
     import REGIR as gil
@@ -23,7 +23,7 @@ You can store any of your models built with REGIR with the `get_model_in_SBML()`
         text_file.write(sbml_model.toSBML())
 
  
-### Load an SBML model into REGIR
+### Loading an SBML model into REGIR
 You can read SBML models with the `build_model_from_SBML` function provided in the `REGIR_SBML.py` file:
 
     class simulation_param:
