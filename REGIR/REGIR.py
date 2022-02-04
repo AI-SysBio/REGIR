@@ -758,17 +758,20 @@ class Gillespie_simulation():
             reactants_list = reaction_channel.reactants
             product_list = reaction_channel.products
             
+            
             rate_label = 'r%s'%ri
             model.addParameter(rate_label, rate)
             rate_law = rate_label     
             for reactant in reactants_list:
                 rate_law += ' * %s' % reactant
-            
-            try:
-                rxn_id = reaction_channel.name.replace(' ','').replace(':','_').replace('->','_')
+
+            from string import punctuation
+
+
+            rxn_id = reaction_channel.name.replace(' ','').replace(':','_').replace('->','_').replace('+','and').replace('-','_')                            
+            if any(p in rxn_id for p in punctuation):
                 model.addReaction(reactants_list, product_list, rate_law, local_params = local_params, rxn_id=rxn_id)
-            
-            except:
+            else:
                 rxn_id = 'reaction_%s'% ri
                 model.addReaction(reactants_list, product_list, rate_law, local_params = local_params, rxn_id=rxn_id)
                 
@@ -783,6 +786,7 @@ class Gillespie_simulation():
                   -> local_params is a dictionary where the keys are local parameter ids and the 
                      values are the desired values of the respective parameters.
                 """
+
         
         return model
 
@@ -820,6 +824,6 @@ def interpolate_minusones(y):
         
 if __name__ == "__main__":
     plt.rcParams.update({'font.size': 16})
-    test = __import__('Example/__TEST_REGIR_distributions')
+    test = __import__('Examples/__TEST_REGIR_distributions')
     test.main()        
         
