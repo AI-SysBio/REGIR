@@ -26,6 +26,6 @@ def main():
     REGIR_SBML = REGIR_from_SBML(verbose=True)
     G_simul = REGIR_SBML.build_model_from_SBML(SBML_file, param)
  
-While many SBML models are available in the BioModels database (https://www.ebi.ac.uk/biomodels/), the majority of them are unfortunatly not compatible with REGIR. In fact, REGIR currently only supports rate laws that are proportional to reactant amounts and that do not depend on other populations. Also, As REGIR creates an explicit list of reactants to store their individual properties, dealing with concentrations rather than reactant amount makes the simulation ambigious. Nevertheless, most of the models on the BioModels database can be adapated to the REGIR framework with manual curation. 
+While many SBML models are available in the BioModels database (https://www.ebi.ac.uk/biomodels/), the majority of them are unfortunatly not compatible with REGIR. In fact, REGIR currently only supports rate laws that are proportional to reactant amounts and that do not depend on other populations. Also, As REGIR creates an explicit list of reactants to store their individual properties, dealing with concentrations rather than reactant amount makes the simulation ambigious. Nevertheless, most of the models on the BioModels database can be adapated to the REGIR framework with some manual adjustement. 
 
-*Feel free to email me if you have a specific SBML model in mind wher eyou would like to testnon-exponential distribution*
+*Feel free to email me if you have a specific SBML model in mind for which you would like to test non-exponential distribution*
