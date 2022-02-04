@@ -1,6 +1,6 @@
 ## Interacting with SBML files
 
-The Systems Biology Markup Language (SBML) is a representation format based on XML, used to store and share computational models. It is a standard for representing computational models in systems biology. REGIR can read and write models in the SBML format. If you want to wotk wit hSBML files, you first need to install the `libSBML` and `simplesbml` libraries with:
+The Systems Biology Markup Language (SBML) is a representation format based on XML, used to store and share computational models, and is a standard for representing computational models in systems biology. REGIR can read and write models in the SBML format. If you want to work with SBML files, you first need to install the `libSBML` and `simplesbml` libraries with:
 
 	- pip install libSBML
 	- pip install simplesbml
@@ -9,7 +9,7 @@ The Systems Biology Markup Language (SBML) is a representation format based on X
 Then, you can store any of your models builtwith REGIR with the `get_model_in_SBML()` method in REGIR. In REGIR, the rate laws are always proportional to the 
 
     
-Then, you can store any of your models builtwith REGIR with the `build_model_from_SBML` method in REGIR:
+Then, you can read your previous models with the `build_model_from_SBML` function provided in the `REGIR_SBML.py` file:
 
 class param:
     Tend = 200		#Length of the simulation
@@ -26,4 +26,6 @@ def main():
     REGIR_SBML = REGIR_from_SBML(verbose=True)
     G_simul = REGIR_SBML.build_model_from_SBML(SBML_file, param)
  
-While many SBML models are available in the BioModels database (https://www.ebi.ac.uk/biomodels/), the majority of them are unfortunatly not compatible with REGIR. In fact, REGIR currently only supports rate laws that are proportional to reactant amounts and that do not depend on other populations. Also, As REGIR 
+While many SBML models are available in the BioModels database (https://www.ebi.ac.uk/biomodels/), the majority of them are unfortunatly not compatible with REGIR. In fact, REGIR currently only supports rate laws that are proportional to reactant amounts and that do not depend on other populations. Also, As REGIR creates an explicit list of reactants to store their individual properties, dealing with concentrations rather than reactant amount makes the simulation ambigious. Nevertheless, most of the models on the BioModels database can be adapated to the REGIR framework with manual curation. 
+
+*Feel free to email me if you have a specific SBML model in mind wher eyou would like to testnon-exponential distribution*
