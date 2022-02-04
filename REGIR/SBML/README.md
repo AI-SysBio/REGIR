@@ -28,9 +28,9 @@ You can read SBML models with the `build_model_from_SBML` function provided in t
 
     class simulation_param:
 	    Tend = 200		#Length of the simulation
-	    unit = 'h'		#Unit of time (is used for plotting purpose only)
 	    N_simulations = 20	
-	    timepoints = 100	#Number of timepoints to record (make surethat this number isnt too big)
+	    unit = 'h'		#Unit of time (is used for plotting purpose only)
+	    timepoints = 100	#Number of timepoints to record (used for plotting only)
     
     #Load SBML file
     SBML_file = 'your_model.sbml'
