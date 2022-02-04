@@ -24,7 +24,7 @@ You can store any of your models built with REGIR with the `get_model_in_SBML()`
 
  
 ### Load an SBML model into REGIR
-You can read an SBML model with the `build_model_from_SBML` function provided in the `REGIR_SBML.py` file:
+You can read SBML models with the `build_model_from_SBML` function provided in the `REGIR_SBML.py` file:
 
     class simulation_param:
     	Tend = 200		#Length of the simulation
