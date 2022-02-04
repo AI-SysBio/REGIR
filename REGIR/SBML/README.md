@@ -27,10 +27,10 @@ You can store any of your models built with REGIR with the `get_model_in_SBML()`
 You can read SBML models with the `build_model_from_SBML` function provided in the `REGIR_SBML.py` file:
 
     class simulation_param:
-	Tend = 200		#Length of the simulation
-	unit = 'h'		#Unit of time (is used for plotting purpose only)
-	N_simulations = 20	
-	timepoints = 100	#Number of timepoints to record (make surethat this number isnt too big)
+	 Tend = 200		#Length of the simulation
+	 unit = 'h'		#Unit of time (is used for plotting purpose only)
+	 N_simulations = 20	
+	 timepoints = 100	#Number of timepoints to record (make surethat this number isnt too big)
     
     #Load SBML file
     SBML_file = 'your_model.sbml'
