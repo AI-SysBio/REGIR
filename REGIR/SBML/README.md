@@ -5,10 +5,12 @@ The Systems Biology Markup Language (SBML) is a representation format based on X
 	- pip install libSBML
 	- pip install simplesbml
 	
-	
+
+### Save REGIR model as SBML
 Then, you can store any of your models builtwith REGIR with the `get_model_in_SBML()` method in REGIR. In REGIR, the rate laws are always proportional to the 
 
-    
+ 
+### Load an SBML model into REGIR
 Then, you can read your previous models with the `build_model_from_SBML` function provided in the `REGIR_SBML.py` file:
 
 class param:
