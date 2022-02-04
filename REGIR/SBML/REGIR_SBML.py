@@ -1,8 +1,14 @@
+""" 
+==============================================================================================================
+================================= Below is only REGIR code related to SBML ===================================
+==============================================================================================================
+"""
 
 import REGIR_test as gil
 import sys
 import numpy as np
 import simplesbml
+import copy
 
 """
    install:
@@ -20,7 +26,7 @@ class REGIR_from_SBML:
         self.verbose = verbose
 
             
-    def build_model_from_SBML(self,SBML_file, param, Shape_and_distrib_in_local_param = False):
+    def build_model_from_SBML(self,SBML_file, param):
 
 
     
@@ -31,13 +37,15 @@ class REGIR_from_SBML:
     
         self.model = simplesbml.loadSBMLFile(SBML_file)
         
+        
+
         #1 = Get relevant parameters from the SBML model
         self.fspecies = self.model.getListOfFloatingSpecies()
         self.bspecies = self.model.getListOfBoundarySpecies()
-        self.species = self.fspecies + self.bspecies
-        self.reactions = self.model.getListOfReactionIds()
-        self.compartements = self.model.getListOfCompartmentIds()
-        self.functions = self.model.getListOfFunctionIds()
+        self.species = sorted(self.fspecies + self.bspecies, key=len)[::-1]
+        self.reactions = sorted(self.model.getListOfReactionIds(), key=len)[::-1]
+        self.compartements = sorted(self.model.getListOfCompartmentIds(), key=len)[::-1] 
+        self.functions = sorted(self.model.getListOfFunctionIds(), key=len)[::-1] 
      
         """         
         print ('List of rules = ', Function_IDs)
@@ -62,15 +70,10 @@ class REGIR_from_SBML:
         
         
         Concentration_array = np.zeros(len(self.species))
+        Amount_array = np.zeros(len(self.species))
         for ei,entity in enumerate(self.species):
             if self.model.isAmount(entity):
-                n_init = int(self.model.getSpeciesInitialAmount(entity))
-                N_init[entity] = n_init
-                if n_init > 10000:
-                    print(" Warning: REGIR be very slow if initial amount is very high")
-                if n_init > 100000 and False:
-                    print(" Simulating more than 100k entities with REGIR is unrealistic")
-                    sys.exit()
+                Amount_array[ei] = int(self.model.getSpeciesInitialAmount(entity))
             elif self.model.isConcentration(entity):
                 concentration = self.model.getSpeciesInitialConcentration(entity)
                 Concentration_array[ei] = concentration
@@ -83,13 +86,34 @@ class REGIR_from_SBML:
             for ei,entity in enumerate(self.species):
                 if self.model.isConcentration(entity):
                     N_init[entity] = int(Concentration_array[ei])
-    
+                    
+                    
+        if np.sum(Amount_array) > 0:
+            if np.max(Amount_array) > 100000:
+                print(" Some reactants are in very high numbers and will take time to build the reactant list")
+                print(" We transform the initial numbers such as the miniumum is 1")
+                
+                Amount_array = Amount_array/np.min(Amount_array[Amount_array>0])*10
+            for ei,entity in enumerate(self.species):
+                if self.model.isAmount(entity):
+                    N_init[entity] = int(Amount_array[ei])
+                        
+                    
+
         if self.verbose: print('  Initial population:',N_init)
+        
+        n_max = np.max(list(N_init.values()))
+        if n_max > 100000:
+            print(" n = %s" % n_max)
+            print(" Warning: REGIR be very slow if initial amount is very high")
+        
         
             
         reaction_channel_list = []
         self.parameter_list = sorted(self.model.getListOfParameterIds(), key=len)[::-1]
         for ri,reactionId in enumerate(self.reactions):
+            
+            
             
             if self.verbose: print()
             
@@ -102,24 +126,30 @@ class REGIR_from_SBML:
             for pi in range(n_products):
                 products_list.append(self.model.getProduct(reactionId, pi))         
             if self.verbose: print("  Reaction", reactants_list, "->", products_list,":")
+            reaction_str = "Reaction " + str(reactants_list) + " -> " + str(products_list)
             
             
             rate_law = self.model.getRateLaw(reactionId)
-            Reactions_to_create, rate = self.analyze_and_transform_rate_law(rate_law)
+            Reactions_to_create, rate = self.analyze_and_transform_rate_law(rate_law,ri,reactionId, reaction_str)
             
-            
-            
-            if Shape_and_distrib_in_local_param:
-                local_param = get_local_param(self.model,ri)
+            local_param = get_local_param(self.model,ri)
+            if 'shape_param' in local_param:
                 shape_param = local_param['shape_param']
+            else:
+                shape_param = 1
+                
+            if 'distribution_index' in local_param:
                 distribution_index = int(local_param['distribution_index'])
                 distribution = get_distribution(distribution_index)
             else:
-                shape_param = 1
                 distribution = 'exp'
-    
+                
+            if 'transfer_identity' in local_param:
+                transfer_identity = local_param['transfer_identity']
+            else:
+                transfer_identity = False    
             
-            reaction = gil.Reaction_channel(param,rate=rate, shape_param=shape_param, distribution = distribution, reactants = reactants_list, products = products_list, name = reactionId)
+            reaction = gil.Reaction_channel(param,rate=rate, shape_param=shape_param, distribution = distribution, reactants = reactants_list, products = products_list, name = reactionId, transfer_identity = transfer_identity)
             reaction_channel_list.append(reaction) 
             
             
@@ -132,42 +162,71 @@ class REGIR_from_SBML:
         G_simul.reaction_channel_list = reaction_channel_list
         
         if self.verbose: print()
-        print("Extracted", G_simul)
+        if self.verbose: print("Extracted", G_simul)
     
         
         return G_simul
 
 
-    def analyze_and_transform_rate_law(self,rate_law):
+    def analyze_and_transform_rate_law(self,rate_law,ri,reactionId, reaction_str):
         
         
         #First, replace the function by its actual expression
         for func in self.functions:
             if func in rate_law:
-                if self.verbose: print('  ',func)
+                #if self.verbose: print('  ',func)
                 func_arguments = self.model.getListOfArgumentsInUserFunction(func)
                 func_body = self.model.getFunctionBody(func)
                 rate_law = evaluate_functions(rate_law,func,func_body,func_arguments)
         
-        if self.verbose: print('  ',rate_law)   
+        if self.verbose: print('   rate law = ', rate_law)   
         
         #Then replace by the parameters
-        for paramID in self.parameter_list:
-            rate_law = rate_law.replace(paramID,str(self.model.getParameterValue(paramID)))
-            
         for ci,comp in enumerate(self.compartements):
             comp_size = get_comp_size(self.model,ci)
             comp_size = 1 #Let's say compsize is always 1
             rate_law = rate_law.replace(comp,str(comp_size))
+        local_param = get_local_param(self.model,ri) 
+        for paramID in sorted(list(local_param.keys()), key=len)[::-1]:
+            rate_law = rate_law.replace(' '+paramID+ ' ',str(local_param[paramID]))
+            
+        for paramID in self.parameter_list:
+            rate_law = rate_law.replace(' '+paramID+' ',str(self.model.getParameterValue(paramID)))
             
             
-        if self.verbose: print('  ',rate_law)   
+        if self.verbose: print('   rate law = ', rate_law)   
         
         #Detect what reactions should be created (+,-,/,*, or incompatible)
-        
+        n_law = 0
+        rate_law_copy = copy.copy(rate_law)
+        for entity in self.species:
+            if entity in rate_law_copy:
+                rate_law_copy = rate_law_copy.replace(entity,'')
+                n_law += 1
+                          
+                
+        n_reactants = self.model.getNumReactants(reactionId)
+        if n_law != n_reactants:
+
+            print()
+            print('   WARNING: REGIR only supports rate laws that are proportional to reactant amounts and')
+            print('            that do not depend on other populations. More complex rate function are not yet ')
+            print('            implemented. The Simulated REGIR WILL NOT correspond to the original SBML model')           
+            print('            -> Problem occured for %s' % reaction_str)
+            print('               rate law = ', rate_law)
+            print()
+            print()
             
         for entity in self.species:  #For REGIR implementation, the rate is always proportional to the number of reactants
             rate_law = rate_law.replace(entity,'1')
+            
+            
+        for paramID in sorted(list(local_param.keys()), key=len)[::-1]:
+            rate_law = rate_law.replace(paramID,str(local_param[paramID]))
+            
+        for paramID in self.parameter_list:
+            rate_law = rate_law.replace(paramID,str(self.model.getParameterValue(paramID)))
+            
 
         
         try:
