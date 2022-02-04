@@ -18,11 +18,11 @@
       <species id="NPC" compartment="comp" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
-      <parameter id="r1" value="0.032" units="per_second" constant="false"/>
-      <parameter id="r2" value="0.017" units="per_second" constant="false"/>
+      <parameter id="r0" value="0.0339" units="per_second" constant="false"/>
+      <parameter id="r1" value="0.0164" units="per_second" constant="false"/>
     </listOfParameters>
     <listOfReactions>
-      <reaction id="ESC_diff" reversible="false" fast="false">
+      <reaction id="Differentiation_ESC_EPI" reversible="false" fast="false">
         <listOfReactants>
           <speciesReference species="ESC" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -33,17 +33,18 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
+              <ci> r0 </ci>
               <ci> ESC </ci>
-              <ci> r1 </ci>
             </apply>
           </math>
           <listOfLocalParameters>
             <localParameter id="shape_param" value="27.6"/>
             <localParameter id="distribution_index" value="3"/>
+            <localParameter id="transfer_identity" value="0"/>
           </listOfLocalParameters>
         </kineticLaw>
       </reaction>
-      <reaction id="EPI_diff" reversible="false" fast="false">
+      <reaction id="Differentiation_EPI_NPC" reversible="false" fast="false">
         <listOfReactants>
           <speciesReference species="EPI" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -54,13 +55,14 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
+              <ci> r1 </ci>
               <ci> EPI </ci>
-              <ci> r2 </ci>
             </apply>
           </math>
           <listOfLocalParameters>
             <localParameter id="shape_param" value="39.29"/>
             <localParameter id="distribution_index" value="3"/>
+            <localParameter id="transfer_identity" value="0"/>
           </listOfLocalParameters>
         </kineticLaw>
       </reaction>

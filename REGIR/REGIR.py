@@ -87,6 +87,7 @@ class Reaction_channel():
         print_str += '\n      rate = %s' % self.rate
         print_str += '\n      shape_parameter = %s' % self.shape_param
         print_str += '\n      distribution = %s' % self.distribution
+        print_str += '\n      transfer_identity = %s' % self.transfer_identity
         
         return print_str
 
@@ -709,6 +710,81 @@ class Gillespie_simulation():
         print()
         print('  - Other reasons include a too small simulation time (Tend)') 
         print('    or not enough repetition of the Gillepie simulations.')
+        
+        
+    def get_model_in_SBML(self):
+        
+        import simplesbml
+        
+        """
+           install:
+             pip install simplesbml
+             pip install tellurium
+             pip install REGIR
+             pip/conda install libSBML
+                
+             See https://simplesbml.readthedocs.io/en/latest/
+        """
+                
+        def Distribution_index(distribution):
+            if distribution.lower() in ['exponential', 'exp']:
+                return 0                    
+            elif distribution.lower() in ['weibull','weib']:
+                return 1                            
+            elif distribution.lower() in ['gaussian', 'normal', 'norm']:
+                return 2                           
+            elif distribution.lower() in ['gamma','gam']:
+                return 3                          
+            elif distribution.lower() in ['lognormal','lognorm']:
+                return 4                       
+            elif distribution.lower() in ['cauchy', 'cau']:
+                return 5
+        
+
+        N_init = self.reactant_population_init
+        model = simplesbml.SbmlModel()
+        model.addCompartment(1, comp_id='comp')        
+        for entity,n_init in N_init.items():
+            model.addSpecies(entity, n_init, comp='comp')
+        
+        Channel_list = self.reaction_channel_list
+        for ri,reaction_channel in enumerate(Channel_list):
+            rate = reaction_channel.rate
+            local_params = {}
+            local_params['shape_param'] = reaction_channel.shape_param
+            local_params['distribution_index'] = Distribution_index(reaction_channel.distribution)
+            local_params['transfer_identity'] = reaction_channel.transfer_identity
+            
+            reactants_list = reaction_channel.reactants
+            product_list = reaction_channel.products
+            
+            rate_label = 'r%s'%ri
+            model.addParameter(rate_label, rate)
+            rate_law = rate_label     
+            for reactant in reactants_list:
+                rate_law += ' * %s' % reactant
+            
+            try:
+                rxn_id = reaction_channel.name.replace(' ','').replace(':','_').replace('->','_')
+                model.addReaction(reactants_list, product_list, rate_law, local_params = local_params, rxn_id=rxn_id)
+            
+            except:
+                rxn_id = 'reaction_%s'% ri
+                model.addReaction(reactants_list, product_list, rate_law, local_params = local_params, rxn_id=rxn_id)
+                
+                """
+                  model.addReaction(reactants, products, expression, local_params={}, rxn_id='')
+                
+                  -> reactants and products are lists of species ids that the user wishes to 
+                     define as reactants and products, respectively. 
+                
+                  -> Expression is a string that represents the reaction rate expression.
+                
+                  -> local_params is a dictionary where the keys are local parameter ids and the 
+                     values are the desired values of the respective parameters.
+                """
+        
+        return model
 
             
             
@@ -744,6 +820,6 @@ def interpolate_minusones(y):
         
 if __name__ == "__main__":
     plt.rcParams.update({'font.size': 16})
-    test = __import__('Examples/__TEST_REGIR_distributions')
+    test = __import__('Example/__TEST_REGIR_distributions')
     test.main()        
         
