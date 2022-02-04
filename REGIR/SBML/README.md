@@ -7,7 +7,7 @@ The Systems Biology Markup Language (SBML) is a representation format based on X
 	
 
 ### Save REGIR model as SBML
-You can store any of your models built with REGIR with the `get_model_in_SBML()` method. Note that in REGIR, the rate laws are always proportional to the number of reactants. For example, the reaction (A+B -> C) will have a propensity of *a = A x B x r*. Because SBML the format is originally designed only for Markovian processes, the additional parameters related the non-markovian processes such as the shape parameter or the type of distribution are stored in the `local_params` field of the reaction definition of `libSBML`.
+You can store any of your models built with REGIR with the `get_model_in_SBML()` method. Note that in REGIR, the rate laws are always proportional to the number of reactants. For example, the reaction (A+B -> C) will have a propensity of *a = A x B x r*. Because the SBML format is originally designed only for Markovian processes, the additional parameters related the non-markovian processes such as the shape parameter or the type of distribution are stored in the `local_params` field of the reaction definition of `libSBML`.
 
     #Define params, N_init and reaction_channel_list
     ...
