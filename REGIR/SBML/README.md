@@ -1,4 +1,4 @@
-## Interacting with SBML files
+# Interacting with SBML files
 
 The Systems Biology Markup Language (SBML) is a format based on `.xml` and a standard for representing computational models in systems biology. REGIR can read and write models in the SBML format, but first you need to install the `libSBML` and `simplesbml` libraries with:
 
