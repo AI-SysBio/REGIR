@@ -16,7 +16,7 @@ First, you need to install REGIR, or you can use the `REGIR.py` file provided in
 	- pip install REGIR
 
 
-Then, you can run a non-Markovian simulation with the toy example below, or load an `SBML` model directly into REGIR (check the [REGIR/SBML](REGIR/SBML) folder for detailed instructions). Other examples, including the three biochemical systems described in the paper: Cell division, differentiation and RNA transcription, are provided in the `/REGIR/Examples` and `/REGIR/Biochemical_applications` folders.
+Then, you can run a non-Markovian simulation with the toy example below, or load an `SBML` model directly into REGIR (check out the [REGIR/SBML](REGIR/SBML) folder for detailed instructions). Other examples, including the three biochemical systems described in the paper: Cell division, differentiation and RNA transcription, are provided in the `/REGIR/Examples` and `/REGIR/Biochemical_applications` folders.
 
 	import REGIR as gil
 
