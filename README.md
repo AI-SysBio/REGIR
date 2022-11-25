@@ -110,6 +110,6 @@ The REGIR framework offer countless possibilities and highly customizable models
 
 ## References
 
-[1] Pélissier, A, Phan, M, et al. "Practical and scalable simulations of non-Markovian stochastic processes". Proceedings of the National Academy of Sciences (2022)
+[1] Pélissier, A, Phan, M, et al. "Practical and scalable simulations of non-Markovian stochastic processes". Submitted to Proceedings of the National Academy of Sciences (2022)
 
 [2] Masuda, Naoki, and Luis EC Rocha. "A Gillespie algorithm for non-Markovian stochastic processes." Siam Review 60.1 (2018): 95-115.
