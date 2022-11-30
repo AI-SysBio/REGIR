@@ -52,9 +52,8 @@ Then, you can run a non-Markovian simulation with the toy example below, or load
 	N_init['C'] = 0
 
 	#Initialize and run the Gillepsie simulation:
-	reaction_channel_list = [reaction1, reaction2, reaction3]
 	G_simul = gil.Gillespie_simulation(N_init,param)
-	G_simul.reaction_channel_list = reaction_channel_list
+	G_simul.reaction_channel_list = [reaction1, reaction2, reaction3]
 	populations = G_simul.run_simulations(param.Tend, verbose = True)
 	
 	#Plot the results:
