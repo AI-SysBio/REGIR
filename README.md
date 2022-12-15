@@ -46,10 +46,7 @@ Then, you can run a non-Markovian simulation with the toy example below, or load
 		
 	
 	#Define the initial population of reactants:
-	N_init = dict()
-	N_init['A'] = 300
-	N_init['B'] = 0
-	N_init['C'] = 0
+	N_init = {'A':300,'B':0,'C':0}
 
 	#Initialize and run the Gillepsie simulation:
 	G_simul = gil.Gillespie_simulation(N_init,param)
