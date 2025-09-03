@@ -69,7 +69,7 @@ def main():
     G_simul = gil.Gillespie_simulation(N_init,param, reaction_channel_list, print_warnings = True)
     
     #run multiple Gillespie simulationand average them
-    G_simul.run_simulations(param.Tend, delay_method = 'Anderson')
+    G_simul.run_simulations(param.Tend, delay_method = 'rejection')
     #G_simul.run_simulations(param.Tend)
     G_simul.plot_inter_event_time_distribution()
     G_simul.plot_populations(figsize = (8,4))
