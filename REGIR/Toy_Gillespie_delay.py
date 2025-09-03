@@ -46,7 +46,7 @@ def main():
     reaction_channel_list.append(channel)
     #No shape parameter 
     
-    #channel = gil.Reaction_channel(param,rate=r0/2, shape_param=0.5, distribution = 'Weibull', precompute_delay = False,  name='Gamma Differentiation: B -> C')
+    #channel = gil.Reaction_channel(param,rate=r0/2, shape_param=2, distribution = 'Weibull', precompute_delay = False,  name='Gamma Differentiation: B -> C')
     #channel.reactants = ['B']
     #channel.products = ['C']
     #reaction_channel_list.append(channel)
