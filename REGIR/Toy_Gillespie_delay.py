@@ -12,14 +12,10 @@ import lib_REGIR_with_delay as gil
 
 
 """ --------------------------------------------------------------------------------------------
-6 reactions:
+3 reactions:
     A -> B,  differentiation (exponential)
-    B -> C,  differentiation (Weibull)
-    C -> D,  differentiation (Gaussian)
-    D -> E,  differentiation (Gamma)
-    E -> F,  differentiation (Cauchy)
-    F -> A,  differentiation (LogNormal)
-    
+    B -> C,  differentiation (Weibull, alpha < 1)
+    C -> D,  differentiation (Gamma)
 """
 class param:
     Tend = 10
