@@ -1,3 +1,6 @@
+
+_Note: This repository represents an earlier version associated with the [Preprint](https://arxiv.org/abs/2212.05059). For the actively maintained and up-to-date implementation, please see NoMaSS (Non-Markovian Stochastic Simulation) at https://github.com/AI-SysBio/NoMaSS_
+
 # REGIR: A Scalable Gillespie Algorithm for non-Markovian Stochastic Simulations
 
 <img align="right" src="https://raw.githubusercontent.com/Aurelien-Pelissier/REGIR/master/Figures/REGIR.png" width=400>
@@ -104,8 +107,31 @@ The REGIR framework offer countless possibilities and highly customizable models
 *Feel free to email me if you are not sure how to do it, I will be happy to help !*
 
 
+## Citation
+
+If you use REGIR, please cite
+
+> Pélissier A., Phan M., Beerenwinkel N., Rodríguez Martínez M. *Gillespie-based simulation and inference for non-Markovian stochastic reaction networks.* Briefings in Bioinformatics 27(5), bbag486 (2026). doi:[10.1093/bib/bbag486](https://doi.org/10.1093/bib/bbag486)
+
+```bibtex
+@article{pelissier2026nomass,
+  title   = {Gillespie-based simulation and inference for non-Markovian stochastic reaction networks},
+  author  = {P{\'e}lissier, Aur{\'e}lien and Phan, Miroslav and Beerenwinkel, Niko and Rodr{\'i}guez Mart{\'i}nez, Mar{\'i}a},
+  journal = {Briefings in Bioinformatics},
+  volume  = {27},
+  number  = {5},
+  pages   = {bbag486},
+  year    = {2026},
+  doi     = {10.1093/bib/bbag486}
+}
+```
+
+*Questions are welcome, feel free to open an issue or drop me an email.*
+
 ## References
 
-[1] Pélissier, A, Phan, M, et al. "Practical and scalable simulations of non-Markovian stochastic processes". *Submitted to Proceedings of the National Academy of Sciences* (2022) [[Preprint]](https://arxiv.org/abs/2212.05059)
+[1] Pélissier A., Phan M., Beerenwinkel N., Rodríguez Martínez M. Gillespie-based simulation and inference for non-Markovian stochastic reaction networks. *Briefings in Bioinformatics* **27**(5), bbag486 (2026). doi:[10.1093/bib/bbag486](https://doi.org/10.1093/bib/bbag486)
 
-[2] Masuda, Naoki, and Luis EC Rocha. "A Gillespie algorithm for non-Markovian stochastic processes." *Siam Review 60.1* (2018): 95-115.
+[2] Pélissier A., Phan M., Le Bail D., Beerenwinkel N., Rodríguez Martínez M. Unifying non-Markovian dynamics and agent heterogeneity in scalable stochastic networks. *Nature Communications* **17**, 3345 (2026). doi:[10.1038/s41467-026-69817-y](https://doi.org/10.1038/s41467-026-69817-y)
+
+[3] Masuda N., Rocha L. E. C. A Gillespie algorithm for non-Markovian stochastic processes. *SIAM Review* **60**(1), 95-115 (2018). doi:[10.1137/16M1055876](https://doi.org/10.1137/16M1055876)
