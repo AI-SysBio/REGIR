@@ -1,5 +1,5 @@
 
-_Note: This repository represents an earlier version associated with the [Preprint article](https://arxiv.org/abs/2212.05059v3) : Practical and scalable simulations of non-Markovian stochastic processes. For the actively maintained and up-to-date implementation, please see NoMaSS (Non-Markovian Stochastic Simulation) at https://github.com/AI-SysBio/NoMaSS_
+_Note: This repository represents an earlier version associated with the [Preprint article: Practical and scalable simulations of non-Markovian stochastic processes](https://arxiv.org/abs/2212.05059v3). For the actively maintained and up-to-date implementation, please see NoMaSS (Non-Markovian Stochastic Simulation) at https://github.com/AI-SysBio/NoMaSS_
 
 # REGIR: A Scalable Gillespie Algorithm for non-Markovian Stochastic Simulations
 
